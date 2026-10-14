@@ -1,0 +1,78 @@
+/* Reference-inspired pearl glass palette. Visual overrides only;
+   existing layout, spacing, navigation and component structure stay intact. */
+:root {
+  color-scheme: light;
+  --text-primary: #17222d;
+  --text-secondary: #414c59;
+  --text-tertiary: #535f6b;
+  --text-muted: #64707b;
+  --bg-gradient: linear-gradient(145deg, #d5dbe3, #d4dae1 45%, #e0d9e5);
+  --bg-orb-1: radial-gradient(ellipse at 5% 90%, rgba(182, 190, 157, .55), transparent 55%);
+  --bg-orb-2: radial-gradient(ellipse at 95% 68%, rgba(196, 169, 210, .5), transparent 55%);
+  --bg-orb-3: radial-gradient(ellipse at 50% 0%, rgba(243, 248, 252, .5), transparent 65%);
+  --liquid-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, .43), rgba(255, 255, 255, .14));
+  --liquid-glass-bg-elevated: linear-gradient(135deg, rgba(255, 255, 255, .65), rgba(255, 255, 255, .24));
+  --liquid-glass-bg-hover: rgba(255, 255, 255, .55);
+  --liquid-glass-bg-subtle: rgba(255, 255, 255, .2);
+  --liquid-glass-border-subtle: rgba(255, 255, 255, .48);
+  --liquid-glass-border: rgba(255, 255, 255, .72);
+  --liquid-glass-border-strong: rgba(255, 255, 255, .9);
+  --liquid-glass-highlight: linear-gradient(120deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .15));
+  --liquid-glass-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), inset 0 -1px 0 rgba(255, 255, 255, .25), 0 5px 12px -6px rgba(65, 74, 92, .22);
+  --liquid-glass-shadow-lg: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -1px 0 rgba(255, 255, 255, .3), 0 9px 22px -12px rgba(65, 74, 92, .27);
+  --blur-glass: blur(24px) saturate(115%);
+  --blur-heavy: blur(36px) saturate(115%);
+  --image-label-bg: rgba(244, 246, 249, .9);
+}
+html { background-color: #d5dbe3; }
+body::before { background: linear-gradient(120deg, rgba(255, 255, 255, .12), transparent 60%); }
+::selection { background: #c5b4da; color: #17222d; }
+::-webkit-scrollbar-track { background: #d8dce3; }
+::-webkit-scrollbar-thumb { background: #a2a9b5; }
+::-webkit-scrollbar-thumb:hover { background: #828d9e; }
+.floating-nav-pill {
+  background: linear-gradient(120deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .24));
+  border-color: var(--liquid-glass-border);
+  box-shadow: var(--liquid-glass-shadow-lg);
+}
+.nav-brand > div { background: linear-gradient(145deg, #c5b4dd, #a9bdb2) !important; border-color: rgba(255, 255, 255, .75) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .65) !important; }
+.nav-pill-btn { color: var(--text-secondary); }
+.nav-pill-btn:hover { color: var(--text-primary); background: rgba(255, 255, 255, .4); }
+.nav-pill-btn.active { color: var(--text-primary); background: linear-gradient(160deg, #fff, rgba(255, 255, 255, .74)); border-color: #fff; box-shadow: var(--liquid-glass-shadow); }
+.btn-liquid-white { color: var(--text-primary); background: linear-gradient(160deg, #fff, #f0f2f6); border-color: rgba(255, 255, 255, .9); box-shadow: var(--liquid-glass-shadow); }
+.btn-liquid-white:hover { background: #fff; box-shadow: var(--liquid-glass-shadow-lg); }
+.btn-liquid-glass { color: var(--text-primary); background: linear-gradient(135deg, rgba(255, 255, 255, .58), rgba(255, 255, 255, .24)); border-color: var(--liquid-glass-border); box-shadow: var(--liquid-glass-shadow); }
+.btn-liquid-glass:hover { background: rgba(255, 255, 255, .7); border-color: #fff; }
+.liquid-pill { color: var(--text-secondary); background: rgba(255, 255, 255, .35); border-color: var(--liquid-glass-border); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7); }
+.liquid-glass-card::after { border-color: rgba(255, 255, 255, .16); }
+.liquid-glass-card.interactive:hover { border-color: rgba(255, 255, 255, .95); }
+.badge-benign { color: #334f45; background: rgba(211, 226, 215, .7); border-color: rgba(255, 255, 255, .8); }
+.badge-malignant { color: #812b46; background: rgba(246, 218, 227, .8); border-color: rgba(255, 255, 255, .8); }
+.badge-premalignant { color: #725221; background: rgba(242, 231, 204, .85); border-color: rgba(255, 255, 255, .8); }
+.form-input, .form-select { color: var(--text-primary); background: rgba(255, 255, 255, .58); border-color: rgba(255, 255, 255, .9); box-shadow: inset 0 1px 3px rgba(88, 96, 112, .06); }
+.form-input::placeholder { color: #616d79; }
+.form-input:focus, .form-select:focus { background: rgba(255, 255, 255, .85); border-color: #88719f; box-shadow: 0 0 0 3px rgba(136, 113, 159, .16); }
+.form-select option { color: var(--text-primary); background: #f0eef4; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible { outline-color: #79618f; }
+.glass-table-wrap { background: rgba(255, 255, 255, .24); border-color: var(--liquid-glass-border); }
+.glass-table th { color: var(--text-secondary); background: rgba(255, 255, 255, .4); border-bottom-color: rgba(112, 122, 139, .16); }
+.glass-table td { color: var(--text-secondary); border-bottom-color: rgba(112, 122, 139, .13); }
+.glass-table tr:hover td { color: var(--text-primary); background: rgba(255, 255, 255, .42); }
+.app-footer { background: rgba(255, 255, 255, .2); border-top-color: var(--liquid-glass-border); }
+.overview-hero { border-color: rgba(255, 255, 255, .85); box-shadow: var(--liquid-glass-shadow-lg); background: #d8dfe5; }
+.hero-background { filter: saturate(.55); }
+.overview-hero::before { background: linear-gradient(90deg, rgba(231, 236, 241, .97), rgba(231, 236, 241, .91) 43%, rgba(220, 227, 234, .3) 76%, rgba(220, 227, 234, .08)); }
+.overview-hero h1 { color: var(--text-primary); }
+.hero-eyebrow { color: #4d5c64; }
+.hero-description { color: #36434f; }
+@media (max-width: 767px) {
+  .overview-hero::before { background: linear-gradient(0deg, rgba(231, 236, 241, .98), rgba(231, 236, 241, .94) 65%, rgba(231, 236, 241, .45)); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root { --liquid-glass-bg: #e5e7ee; --liquid-glass-bg-elevated: #eff0f5; --blur-glass: none; --blur-heavy: none; }
+  .floating-nav-pill, .btn-liquid-glass, .liquid-pill, .glass-table-wrap { background: #e9eaf0; }
+  .form-input, .form-select { background: #f8f9fb; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .floating-nav-pill, .liquid-glass-card, .btn-liquid-glass, .liquid-pill, .glass-table-wrap { background: #e5e7ee; }
+}

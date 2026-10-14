@@ -1,0 +1,123 @@
+/* iOS-inspired web material, not Apple's native Liquid Glass implementation.
+   Rounded panels: 28px; controls: capsules; inputs: 12px.
+   Layer order: image 0, hero content 1, sticky navigation 10.
+   Design variance 4 / motion 3 / density 4: preserve the existing clinical UI. */
+:root {
+  color-scheme: dark;
+  --liquid-glass-bg: linear-gradient(135deg, rgba(222, 241, 252, .10), rgba(190, 217, 235, .035)), rgba(19, 34, 46, .66);
+  --liquid-glass-bg-elevated: linear-gradient(135deg, rgba(225, 242, 254, .16), rgba(190, 217, 235, .06)), rgba(21, 37, 50, .64);
+  --liquid-glass-bg-hover: rgba(76, 100, 118, .42);
+  --liquid-glass-border: rgba(226, 241, 252, .20);
+  --liquid-glass-border-strong: rgba(236, 246, 255, .32);
+  --liquid-glass-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), inset 0 -1px 0 rgba(255, 255, 255, .035), 0 12px 30px -16px rgba(2, 9, 16, .55);
+  --liquid-glass-shadow-lg: inset 0 1px 0 rgba(255, 255, 255, .4), inset 0 -1px 0 rgba(255, 255, 255, .08), 0 20px 48px -22px rgba(2, 9, 16, .65);
+  --blur-glass: blur(22px) saturate(155%);
+  --blur-heavy: blur(30px) saturate(160%);
+}
+
+body { letter-spacing: -.012em; }
+h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; }
+main h1 { font-weight: 650 !important; letter-spacing: -.045em !important; line-height: 1.1; }
+main h2 { font-weight: 600 !important; letter-spacing: -.035em !important; line-height: 1.15; }
+button { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid #89caff;
+  outline-offset: 4px;
+}
+.app-shell { min-height: 100dvh; display: flex; flex-direction: column; }
+.app-main { flex: 1; padding: 38px 0 64px; }
+.app-footer { margin-top: auto; padding: 30px 0; border-top: 1px solid var(--liquid-glass-border-subtle); background: rgba(9, 18, 26, .65); font-size: .84rem; color: var(--text-tertiary); }
+.app-footer button { min-height: 44px; }
+
+.floating-navbar-container { top: 18px; z-index: 10; margin: 18px 0 0; }
+.floating-nav-pill {
+  background: linear-gradient(115deg, rgba(235, 247, 255, .19), rgba(235, 247, 255, .04)), rgba(17, 30, 42, .64);
+  border-color: rgba(241, 249, 255, .28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .48), inset 0 -1px 0 rgba(255, 255, 255, .07), 0 8px 32px rgba(3, 12, 20, .25);
+  padding: 7px 9px; max-width: 100%;
+}
+.nav-brand { background: none; border: none; flex-shrink: 0; min-height: 44px; border-radius: 999px; }
+.nav-pill-btn { min-height: 44px; padding: 10px 16px; white-space: nowrap; font-size: .88rem; letter-spacing: -.015em; }
+.nav-pill-btn.active { background: rgba(244, 249, 253, .92); border-color: rgba(255, 255, 255, .7); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 3px 10px rgba(3, 12, 20, .15); }
+.btn { min-height: 44px; letter-spacing: -.018em; white-space: nowrap; }
+.btn-lg { min-height: 52px; padding: 14px 24px; font-size: 1rem; }
+.btn-liquid-white { background: #f0f6fa; box-shadow: inset 0 1px 0 #fff, 0 4px 16px rgba(3, 12, 20, .18); }
+.btn-liquid-white:hover { background: #fff; box-shadow: 0 6px 20px rgba(3, 12, 20, .25); transform: translateY(-1px); }
+.btn-liquid-glass { background: linear-gradient(145deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .06)), rgba(12, 27, 38, .54); -webkit-backdrop-filter: var(--blur-glass); }
+.btn:active, .nav-pill-btn:active { transform: scale(.98); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.liquid-glass-card.interactive:hover { transform: translateY(-2px); box-shadow: var(--liquid-glass-shadow); }
+.liquid-glass-card::after { content: ''; position: absolute; inset: 1px; border: 1px solid rgba(237, 249, 255, .035); border-radius: inherit; pointer-events: none; }
+.liquid-pill { background: rgba(180, 208, 229, .09); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15); border-color: rgba(225, 242, 255, .2); -webkit-backdrop-filter: var(--blur-glass); }
+.liquid-pill-dot { display: none; }
+.badge { box-shadow: none; }
+.form-input, .form-select { background: rgba(6, 18, 28, .35); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .12); min-height: 46px; }
+.form-input::placeholder { color: #aebfcb; opacity: 1; }
+.form-input:focus, .form-select:focus { border-color: #89caff; box-shadow: 0 0 0 3px rgba(137, 202, 255, .16); }
+.glass-table { font-variant-numeric: tabular-nums; }
+.glass-table th { text-transform: none; letter-spacing: -.01em; font-size: .85rem; }
+.analysis-layout { display: grid; grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); gap: 28px; align-items: start; }
+
+.is-overview .app-main { padding-top: 24px; }
+.overview-hero { position: relative; isolation: isolate; border-radius: 36px; overflow: hidden; min-height: 570px; display: flex; align-items: center; padding: 64px 54px; border: 1px solid rgba(222, 242, 255, .24); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 24px 70px -40px rgba(0, 0, 0, .8); }
+.hero-background { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 61% center; z-index: -2; }
+.overview-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(5, 17, 27, .91) 0%, rgba(5, 17, 27, .73) 37%, rgba(5, 17, 27, .20) 76%), linear-gradient(0deg, rgba(5, 17, 27, .28), transparent 60%); }
+.hero-content { max-width: 710px; }
+.hero-eyebrow { color: #d1e7f7; font-size: .95rem; font-weight: 500; margin-bottom: 22px; }
+.overview-hero h1 { font-size: clamp(2.65rem, 4.6vw, 4.3rem); max-width: 710px; margin-bottom: 24px; color: #f7fafc; }
+.hero-description { max-width: 460px; color: #d8e3ed; font-size: 1.12rem; line-height: 1.65; margin-bottom: 32px; text-wrap: pretty; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.overview-stats { margin: 24px 0 68px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.stats-grid .liquid-glass-card { padding: 24px !important; }
+.stats-grid .liquid-glass-card > div:first-child { text-transform: none !important; letter-spacing: -.01em !important; font-size: .83rem !important; }
+.stats-grid .liquid-glass-card > div:nth-child(2) { font-family: var(--font-display) !important; font-variant-numeric: tabular-nums; font-weight: 600 !important; letter-spacing: -.05em !important; }
+.animate-fade-up, .floating-anim { animation: none; }
+
+@media (max-width: 1023px) {
+  .floating-nav-pill { gap: 4px; }
+  .nav-pill-btn { padding: 10px 12px; }
+  .floating-nav-pill > .btn { display: none; }
+  .overview-hero { padding: 48px 36px; min-height: 540px; }
+  .overview-hero h1 { max-width: 650px; }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .container { padding: 0 16px; }
+  .floating-navbar-container { top: 10px; padding: 0 12px; margin-top: 10px; }
+  .floating-nav-pill { width: 100%; flex-wrap: wrap; justify-content: center; border-radius: 26px; padding: 6px; }
+  .nav-brand { justify-content: center; }
+  .floating-nav-pill nav { width: 100%; overflow-x: auto; justify-content: flex-start; padding: 0 2px 2px; }
+  .nav-pill-btn { flex: 1; justify-content: center; font-size: .72rem; padding: 10px 6px; gap: 4px; }
+  .nav-pill-btn svg { display: none; }
+  .app-main { padding-top: 28px; }
+  .overview-hero { padding: 36px 24px; min-height: 570px; border-radius: 28px; align-items: flex-end; }
+  .hero-background { object-position: 64% center; }
+  .overview-hero::before { background: linear-gradient(0deg, rgba(5, 17, 27, .96), rgba(5, 17, 27, .74) 60%, rgba(5, 17, 27, .25)); }
+  .overview-hero h1 { font-size: clamp(2.4rem, 8.5vw, 3.4rem); }
+  .hero-eyebrow { margin-bottom: 16px; }
+  .hero-description { font-size: 1rem; margin-bottom: 26px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { padding-inline: 14px; font-size: .94rem; }
+  .stats-grid { gap: 12px; }
+  .stats-grid .liquid-glass-card { padding: 18px !important; border-radius: 22px; }
+  .stats-grid .liquid-glass-card > div:nth-child(2) { font-size: 2rem !important; }
+  .analysis-layout { grid-template-columns: minmax(0, 1fr); }
+  main h1 { font-size: 2.4rem !important; }
+}
+@media (max-width: 359px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .nav-pill-btn { padding-inline: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root { --liquid-glass-bg: #223645; --liquid-glass-bg-elevated: #2a4052; --blur-glass: none; --blur-heavy: none; }
+  .floating-nav-pill, .btn-liquid-glass, .liquid-pill, .glass-table-wrap { background: #223645; }
+  .form-input, .form-select { background: #162735; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .floating-nav-pill, .liquid-glass-card, .btn-liquid-glass, .liquid-pill, .glass-table-wrap { background: #223645; }
+}
