@@ -1,11 +1,20 @@
 """Binary retrieval metrics. Similarity is not a diagnostic probability."""
 
 from math import isfinite, log2
+from itertools import islice
+from numbers import Integral
+
+
+def _validate_counts(total_relevant: int, k: int) -> None:
+    if isinstance(k, bool) or not isinstance(k, Integral) or k < 1:
+        raise ValueError("k must be a positive integer")
+    if (isinstance(total_relevant, bool) or not isinstance(total_relevant, Integral)
+            or total_relevant < 0):
+        raise ValueError("total_relevant must be a nonnegative integer")
 
 
 def ideal_dcg(total_relevant: int, k: int = 10) -> float:
-    if k < 1 or total_relevant < 0:
-        raise ValueError("k must be positive and total_relevant nonnegative")
+    _validate_counts(total_relevant, k)
     return sum(1.0 / log2(rank + 1) for rank in range(1, min(total_relevant, k) + 1))
 
 
@@ -15,7 +24,8 @@ def retrieval_metrics(relevance, total_relevant: int, k: int = 10) -> dict:
     Unreturned ranks count as non-relevant. RR is truncated at k.
     Relevance means matching the dataset diagnosis, not clinical equivalence.
     """
-    values = list(relevance)[:k]
+    _validate_counts(total_relevant, k)
+    values = list(islice(relevance, k))
     if any(value not in (0, 1, False, True) for value in values):
         raise ValueError("Only binary relevance is supported")
     denominator = ideal_dcg(total_relevant, k)
@@ -41,6 +51,7 @@ def correct_legacy_ndcg(legacy_ndcg: float, precision: float,
     Valid ONLY for the historical binary metric whose IDCG used the number of
     positives in the returned top-k. This is metric recovery, not fresh inference.
     """
+    _validate_counts(total_relevant, k)
     if not all(isfinite(value) and 0 <= value <= 1 for value in (legacy_ndcg, precision)):
         raise ValueError("Legacy NDCG and precision must be finite values in [0, 1]")
     count = round(precision * k)
