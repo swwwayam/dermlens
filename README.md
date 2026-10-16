@@ -52,6 +52,15 @@ npm run dev -- --host 127.0.0.1
 Frontend: http://127.0.0.1:5173/  
 API documentation: http://127.0.0.1:8000/docs
 
+## API configuration and troubleshooting
+
+Frontend API calls use relative `/api` URLs by default. The Vite development server proxies these requests to `http://localhost:8000`. For separate frontend/backend hosting, copy `frontend/web/.env.example` to `frontend/web/.env.local` and set `VITE_API_URL` to the backend origin. Restart Vite after changing environment variables. A production host must route `/api` to the backend, or use an explicit backend URL with an appropriate CORS configuration.
+
+- If analysis or metrics requests fail, check that the backend is running on port 8000 and open its `/docs` endpoint.
+- If backend startup reports missing files, generate the reference artifacts listed above. A fresh clone does not include the dataset, embeddings, index, or evaluation outputs.
+- Check the React production build with `npm run build` inside `frontend/web`.
+- Run metric regression checks from the project root with `python -m unittest discover -s backend/evaluation/tests -p "test_*.py"`.
+
 ## Research status
 
 Results are retrieval scores, not calibrated diagnostic probabilities. The current encoder uses pretrained ImageNet weights. Evaluation audit utilities provide corrected NDCG calculations, but historical evaluation scripts and dashboard outputs may still use legacy metrics. The project is a research prototype and has not been clinically validated.
