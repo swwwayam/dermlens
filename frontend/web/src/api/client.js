@@ -3,9 +3,7 @@
  * Connects to FastAPI backend at port 8000 or relative proxy
  */
 
-const API_BASE = window.location.port === '8000'
-  ? ''
-  : (import.meta.env?.VITE_API_URL || 'http://localhost:8000');
+const API_BASE = (import.meta.env?.VITE_API_URL || '').trim().replace(/\/+$/, '');
 
 export async function analyzeLesion(formData) {
   const res = await fetch(`${API_BASE}/api/analyze`, {
